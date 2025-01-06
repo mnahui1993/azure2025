@@ -1,0 +1,25 @@
+#obtener secretos y en la clase java llamar al secreto que queremos
+#spring:
+#  cloud:
+#    azure:
+#      keyvault:
+#        secret:
+#          endpoint: https://clavedesarrollo.vault.azure.net/
+
+
+#inyectar secreto sin clase java solo con las properties
+spring:
+  cloud:
+    azure:
+      compatibility-verifier:
+        enabled: false
+      keyvault:
+        secret:
+          property-sources[0]:
+            name: key-vault-property-source-1
+            endpoint: https://clavedesarrollo.vault.azure.net/
+          property-source-enabled: true
+
+database:
+  secret:
+    value: ${conectionprueba}
