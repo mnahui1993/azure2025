@@ -9,18 +9,18 @@
 server:
   port : 8080
 #inyectar secreto sin clase java solo con las properties
-#spring:
-#  cloud:
-#    azure:
-#      compatibility-verifier:
-#        enabled: false
-#      keyvault:
-#        secret:
-#          property-sources[0]:
-#            name: key-vault-property-source-1
-#            endpoint: https://clavedesarrollo.vault.azure.net/
-#          property-source-enabled: true
+spring:
+  cloud:
+    azure:
+      compatibility-verifier:
+        enabled: false
+      keyvault:
+        secret:
+          property-sources[0]:
+            name: key-vault-property-source-1
+            endpoint: https://clavedesarrollo.vault.azure.net/
+          property-source-enabled: true
 
-#database:
-#  secret:
-#    value: ${conectionprueba}
+database:
+  secret:
+    value: ${conectionprueba}
