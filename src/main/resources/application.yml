@@ -6,7 +6,8 @@
 #        secret:
 #          endpoint: https://clavedesarrollo.vault.azure.net/
 
-
+server:
+  port : 8080
 #inyectar secreto sin clase java solo con las properties
 spring:
   cloud:
