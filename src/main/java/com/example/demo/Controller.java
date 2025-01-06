@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
 
-    @Value("${database.secret.value}")
-    private String mySecret;
+
 
     @GetMapping("/api/v1/getsecret")
     public Model secretoo() throws JsonProcessingException {
@@ -21,7 +20,7 @@ public class Controller {
 
 
         Model model= new Model();
-        model.setSecret(mySecret);
+        model.setSecret("ok");
         return model;
 
 
