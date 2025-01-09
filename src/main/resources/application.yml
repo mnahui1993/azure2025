@@ -20,7 +20,20 @@ spring:
             name: key-vault-property-source-1
             endpoint: https://clavedesarrollo.vault.azure.net/
           property-source-enabled: true
+      cosmos:
+        database: ${databasecosmo}
+        populate-query-metrics: true
+        endpoint: ${endpoint-cosmos}
+        key: ${urikeycosmo}
+  data:
+    redis:
+      host: ${hostredis}
+      port: 6380
+      password: ${urikeyredis}
+      ssl:
+        enabled: true
 
 database:
   secret:
     value: ${conectionprueba}
+

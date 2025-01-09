@@ -1,26 +1,70 @@
 package com.example.demo;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.demo.dto.ProductDto;
+import com.example.demo.dto.PruebaDto;
+import com.example.demo.model.Product;
+import com.example.demo.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
+import org.springframework.data.redis.core.ReactiveValueOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.time.Duration;
+
 
 @RestController
+@RequestMapping("/api/v1")
 public class Controller {
 
 
     @Value("${database.secret.value}")
     private String mySecret;
 
-    @GetMapping("/api/v1/getsecret")
-    public Model secretoo() throws JsonProcessingException {
+     @Autowired
+    private StringRedisTemplate template;;
 
-        Model model= new Model();
-        model.setSecret(mySecret);
-        return model;
+     @Autowired
+     private ProductRepository productRepository;
 
+
+
+
+
+    @GetMapping("/getsecret")
+    public Model secretoo() {
+        return Model.builder().secret(mySecret).build();
+    }
+
+    @GetMapping("/getproduct")
+    public Flux<Product> getproduct()   {
+
+        return productRepository.findAll();
 
     }
+    @PostMapping("/product")
+    public Mono<Product> save(@RequestBody ProductDto productDto){
+       var product= Product.builder()
+                .idProduct(productDto.getIdProduct())
+                .description(productDto.getDescription())
+                .expirationDate(productDto.getExpirationDate())
+                .build();
+        return productRepository.save(product);
+    }
+
+    @GetMapping("/redis/product/{key}")
+    public void insertarConExpiracion(@PathVariable(name = "key") String key) {
+       ValueOperations<String, String> ops = this.template.opsForValue();
+        //String key = "mm";
+        if(!this.template.hasKey(key)){
+            ops.set(key, "Hello World" + key);
+        }
+    }
 }
+
+

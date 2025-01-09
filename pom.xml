@@ -35,9 +35,37 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.azure.spring</groupId>
 			<artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-spring-data-cosmos</artifactId>
+		</dependency>
+
+
+
+		<!-- Lettuce Client (Non-blocking Redis client) -->
+		<dependency>
+			<groupId>com.azure.spring</groupId>
+			<artifactId>spring-cloud-azure-starter-data-redis-lettuce</artifactId>
+			<version>5.19.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+		</dependency>
+
+
+
+		<!-- Jackson2 para serialización/deserialización de objetos en JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
 
@@ -57,6 +85,11 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+
+
+
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

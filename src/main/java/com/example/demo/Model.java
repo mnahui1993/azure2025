@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class Model {
     private String secret;
 }
