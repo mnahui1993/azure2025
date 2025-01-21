@@ -1,0 +1,33 @@
+server:
+  port: 8082
+spring:
+  profiles:
+      active: dev
+  application:
+      name: serviceproduct
+  jackson:
+      property-naming-strategy: SNAKE_CASE
+      constructor-detector: default
+  cloud:
+    azure:
+      compatibility-verifier:
+        enabled: false
+      keyvault:
+        secret:
+          property-sources[0]:
+            name: key-vault-property-source-1
+            endpoint: https://clavedesarrollo.vault.azure.net/
+          property-source-enabled: true
+      cosmos:
+        database: ${basededatoscosmosdb}
+        populate-query-metrics: true
+        endpoint: ${endpoint-cosmos}
+        key: ${urikeycosmo}
+  data:
+    redis:
+      host: ${hostredis}
+      port: 6380
+      password: ${urikeyredis}
+      ssl:
+        enabled: true
+
